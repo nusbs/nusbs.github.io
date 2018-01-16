@@ -1,3 +1,5 @@
+var backend = "https://script.google.com/macros/s/AKfycbyq3uuA2S9pRHe9ogKPHg8zL31RiLDo_ZAkNULr9gQUFpcAjFY/exec";
+
 var site = new Vue({
     el:"#site",
     data:{
@@ -22,6 +24,14 @@ var site = new Vue({
             name:"Alecs",
             pic:"assets/ppl_1.jpg"
         },{
+            role:"Communication Director",
+            name:"HuiYee",
+            pic:"assets/ppl_7.jpg"
+        },{
+            role:"Projects Director",
+            name:"HuiLing",
+            pic:"assets/ppl_8.jpg"
+        }{
             role:"Dharma Director",
             name:"ShuPeng",
             pic:"assets/ppl_3.jpg"
@@ -63,11 +73,18 @@ var site = new Vue({
         }],
         adv_id:0,
 
-        events:[
-            "assets/ppl_1.jpg",
-            "assets/ppl_1.jpg",
-            "assets/ppl_1.jpg"
-        ],
+        events:[],
         events_id:0
     }
 });
+
+(function(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", backend);
+    xhr.onreadystatechange = function(res){
+        if(this.readyState==4){
+            site.events = eval("("+this.responseText+")");
+        }
+    };
+    xhr.send();
+})();
